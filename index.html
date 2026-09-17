@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wema Corporate Portal</title>
+<style>
+    :root {
+        --purple: #812990;
+        --purple-dark: #5d176a;
+        --purple-light: #f5eafa;
+        --pink: #c72c91;
+        --dark: #181818;
+        --text: #444;
+        --muted: #777;
+        --white: #fff;
+        --light: #f8f8f8;
+        --border: #e9e9e9;
+        --green: #159447;
+        --shadow: 0 12px 35px rgba(0, 0, 0, .08);
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        margin: 0;
+        font-family: Inter, "Segoe UI", system-ui, -apple-system, sans-serif;
+        color: var(--dark);
+        background: var(--white);
+        line-height: 1.6;
+    }
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    /* TOP BAR */
+    .topbar {
+        background: #4d0f59;
+        color: #fff;
+        padding: 8px 5%;
+        display: flex;
+        justify-content: flex-end;
+        gap: 24px;
+        font-size: 13px;
+    }
+
+    .topbar a:hover {
+        text-decoration: underline;
+    }
+
+    /* NAVIGATION */
+    header {
+        background: #fff;
+        border-bottom: 1px solid var(--border);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .nav {
+        max-width: 1280px;
+        margin: auto;
+        min-height: 76px;
+        padding: 0 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 30px;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 24px;
+        font-weight: 800;
+        color: var(--purple);
+        white-space: nowrap;
+    }
+
+    .logo-mark {
+        width: 40px;
+        height: 40px;
+        border-radius: 50% 50% 50% 8px;
+        background: linear-gradient(135deg, var(--purple), var(--pink));
+        transform: rotate(-45deg);
+        position: relative;
+    }
+
+    .logo-mark::after {
+        content: "";
+        position: absolute;
+        width: 13px;
+        height: 13px;
+        background: #fff;
+        border-radius: 50%;
+        top: 13px;
+        left: 13px;
+    }
+
+    .logo span {
+        transform: none;
+    }
+
+    nav {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    nav a {
+        color: #333;
+    }
+
+    nav a:hover {
+        color: var(--purple);
+    }
+
+    .nav-button {
+        background: var(--purple);
+        color: #fff !important;
+        padding: 12px 21px;
+        border-radius: 6px;
+    }
+
+    /* HERO */
+    .hero {
+        position: relative;
+        overflow: hidden;
+        min-height: 590px;
+        background:
+            radial-gradient(circle at 90% 20%, rgba(199,44,145,.35), transparent 25%),
+            radial-gradient(circle at 15% 80%, rgba(129,41,144,.35), transparent 30%),
+            linear-gradient(120deg, #4d1259 0%, #812990 50%, #a52a91 100%);
+        color: white;
+        display: flex;
+        align-items: center;
+    }
+
+    .hero::before {
+        content: "";
+        position: absolute;
+        width: 500px;
+        height: 500px;
+        right: -180px;
+        bottom: -240px;
+        border: 80px solid rgba(255,255,255,.08);
+        border-radius: 50%;
+    }
+
+    .hero-content {
+        max-width: 1280px;
+        width: 100%;
+        margin: auto;
+        padding: 80px 24px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255,255,255,.14);
+        border: 1px solid rgba(255,255,255,.22);
+        padding: 8px 14px;
+        border-radius: 30px;
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 22px;
+    }
+
+    .status-dot {
+        width: 8px;
+        height: 8px;
+        background: #61e48a;
+        border-radius: 50%;
+        box-shadow: 0 0 0 4px rgba(97,228,138,.15);
+    }
+
+    .hero h1 {
+        max-width: 760px;
+        font-size: clamp(42px, 6vw, 72px);
+        line-height: 1.05;
+        margin: 0 0 22px;
+        letter-spacing: -2px;
+    }
+
+    .hero p {
+        max-width: 680px;
+        color: rgba(255,255,255,.88);
+        font-size: 18px;
+        margin: 0 0 34px;
+    }
+
+    .hero-actions {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px 24px;
+        border-radius: 6px;
+        font-weight: 700;
+        border: 1px solid transparent;
+        transition: .2s ease;
+    }
+
+    .btn-primary {
+        background: #fff;
+        color: var(--purple);
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+    }
+
+    .btn-outline {
+        color: #fff;
+        border-color: rgba(255,255,255,.5);
+        background: rgba(255,255,255,.06);
+    }
+
+    .btn-outline:hover {
+        background: rgba(255,255,255,.14);
+    }
+
+    /* STATS */
+    .stats {
+        max-width: 1120px;
+        margin: -55px auto 0;
+        position: relative;
+        z-index: 5;
+        padding: 0 20px;
+    }
+
+    .stats-grid {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        overflow: hidden;
+    }
+
+    .stat {
+        padding: 28px;
+        text-align: center;
+        border-right: 1px solid var(--border);
+    }
+
+    .stat:last-child {
+        border-right: 0;
+    }
+
+    .stat strong {
+        display: block;
+        color: var(--purple);
+        font-size: 25px;
+        margin-bottom: 4px;
+    }
+
+    .stat span {
+        color: var(--muted);
+        font-size: 13px;
+    }
+
+    /* GENERAL SECTIONS */
+    section.content-section {
+        max-width: 1200px;
+        margin: auto;
+        padding: 100px 24px;
+    }
+
+    .section-heading {
+        max-width: 700px;
+        margin-bottom: 45px;
+    }
+
+    .section-heading .label {
+        color: var(--purple);
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        font-weight: 800;
+    }
+
+    .section-heading h2 {
+        font-size: clamp(32px, 4vw, 48px);
+        line-height: 1.15;
+        margin: 10px 0 15px;
+    }
+
+    .section-heading p {
+        color: var(--muted);
+        font-size: 17px;
+    }
+
+    /* SERVICES */
+    .services {
+        background: var(--light);
+    }
+
+    .service-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+    }
+
+    .card {
+        background: #fff;
+        padding: 32px;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        transition: .25s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow);
+    }
+
+    .icon {
+        width: 52px;
+        height: 52px;
+        display: grid;
+        place-items: center;
+        border-radius: 12px;
+        background: var(--purple-light);
+        color: var(--purple);
+        font-size: 22px;
+        margin-bottom: 22px;
+    }
+
+    .card h3 {
+        margin: 0 0 10px;
+        font-size: 21px;
+    }
+
+    .card p {
+        color: var(--muted);
+        margin: 0 0 20px;
+        font-size: 14px;
+    }
+
+    .card-link {
+        color: var(--purple);
+        font-size: 14px;
+        font-weight: 800;
+    }
+
+    /* FEATURE */
+    .feature {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+    }
+
+    .feature-visual {
+        min-height: 430px;
+        border-radius: 18px;
+        padding: 30px;
+        background:
+            linear-gradient(135deg, rgba(129,41,144,.96), rgba(199,44,145,.9)),
+            #812990;
+        color: #fff;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .feature-visual::before,
+    .feature-visual::after {
+        content: "";
+        position: absolute;
+        border: 1px solid rgba(255,255,255,.18);
+        border-radius: 50%;
+    }
+
+    .feature-visual::before {
+        width: 400px;
+        height: 400px;
+        right: -180px;
+        top: -160px;
+    }
+
+    .feature-visual::after {
+        width: 300px;
+        height: 300px;
+        left: -160px;
+        bottom: -160px;
+    }
+
+    .terminal {
+        position: absolute;
+        left: 30px;
+        right: 30px;
+        bottom: 30px;
+        background: rgba(20,10,25,.8);
+        border: 1px solid rgba(255,255,255,.15);
+        border-radius: 10px;
+        padding: 20px;
+        font-family: monospace;
+        font-size: 13px;
+        box-shadow: 0 20px 50px rgba(0,0,0,.2);
+    }
+
+    .terminal .green {
+        color: #61e48a;
+    }
+
+    .feature-copy h2 {
+        font-size: 42px;
+        line-height: 1.15;
+        margin: 10px 0 18px;
+    }
+
+    .feature-copy p {
+        color: var(--muted);
+        font-size: 16px;
+    }
+
+    .check-list {
+        padding: 0;
+        margin: 25px 0;
+        list-style: none;
+    }
+
+    .check-list li {
+        margin: 13px 0;
+        font-size: 15px;
+    }
+
+    .check-list li::before {
+        content: "✓";
+        color: var(--green);
+        font-weight: 900;
+        margin-right: 10px;
+    }
+
+    /* CTA */
+    .cta {
+        max-width: 1150px;
+        margin: 30px auto 100px;
+        padding: 65px;
+        border-radius: 18px;
+        background: linear-gradient(120deg, #57135f, #812990);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 35px;
+    }
+
+    .cta h2 {
+        margin: 0 0 10px;
+        font-size: 34px;
+    }
+
+    .cta p {
+        margin: 0;
+        color: rgba(255,255,255,.8);
+    }
+
+    /* FOOTER */
+    footer {
+        background: #210725;
+        color: #fff;
+        padding: 65px 5% 25px;
+    }
+
+    .footer-grid {
+        max-width: 1200px;
+        margin: auto;
+        display: grid;
+        grid-template-columns: 1.5fr repeat(3, 1fr);
+        gap: 50px;
+    }
+
+    .footer-brand h3 {
+        font-size: 24px;
+        margin: 0 0 12px;
+    }
+
+    .footer-brand p {
+        max-width: 340px;
+        color: #cdbfd0;
+        font-size: 14px;
+    }
+
+    footer h4 {
+        margin-top: 0;
+        margin-bottom: 18px;
+    }
+
+    footer a {
+        display: block;
+        color: #cdbfd0;
+        font-size: 14px;
+        margin: 10px 0;
+    }
+
+    footer a:hover {
+        color: #fff;
+    }
+
+    .copyright {
+        max-width: 1200px;
+        margin: 55px auto 0;
+        padding-top: 22px;
+        border-top: 1px solid rgba(255,255,255,.12);
+        color: #a998ac;
+        font-size: 12px;
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+        nav {
+            display: none;
+        }
+
+        .stats-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .stat:nth-child(2) {
+            border-right: 0;
+        }
+
+        .stat:nth-child(-n+2) {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .service-grid,
+        .feature {
+            grid-template-columns: 1fr;
+        }
+
+        .footer-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .cta {
+            margin-left: 20px;
+            margin-right: 20px;
+            padding: 40px 30px;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .topbar {
+            display: none;
+        }
+
+        .nav {
+            min-height: 65px;
+        }
+
+        .hero {
+            min-height: 540px;
+        }
+
+        .hero h1 {
+            letter-spacing: -1px;
+        }
+
+        .stats-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .stat {
+            border-right: 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .stat:last-child {
+            border-bottom: 0;
+        }
+
+        section.content-section {
+            padding: 70px 20px;
+        }
+
+        .footer-grid {
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        .copyright {
+            flex-direction: column;
+        }
+    }
+</style>
+</head>
+<body>
+<!-- TOP BAR -->
+<div class="topbar">
+    <a href="#">Help & Support</a>
+    <a href="#">Security</a>
+    <a href="#">Contact</a>
+</div>
+
+<!-- NAVIGATION -->
+<header>
+    <div class="nav">
+
+        <a href="#" class="logo">
+            <span class="logo-mark"></span>
+            <span>Wema</span>
+        </a>
+
+        <nav>
+            <a href="#platform">Platform</a>
+            <a href="#services">Services</a>
+            <a href="#monitoring">Monitoring</a>
+            <a href="#documentation">Documentation</a>
+            <a href="#contact">Contact</a>
+            <a href="#" class="nav-button">Deployment Console</a>
+        </nav>
+
+    </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-content">
+
+        <div class="eyebrow">
+            <span class="status-dot"></span>
+            Corporate IT Environment • All Systems Operational
+        </div>
+
+        <h1>
+            Building the future of banking technology.
+        </h1>
+
+        <p>
+            Welcome to the Wema Bank corporate deployment environment.
+            Manage applications, monitor infrastructure and deliver secure
+            digital experiences through a modern cloud platform.
+        </p>
+
+        <div class="hero-actions">
+            <a href="#platform" class="btn btn-primary">
+                Explore Platform
+            </a>
+
+            <a href="#monitoring" class="btn btn-outline">
+                View System Status
+            </a>
+        </div>
+
+    </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+    <div class="stats-grid">
+
+        <div class="stat">
+            <strong>99.99%</strong>
+            <span>Platform Availability</span>
+        </div>
+
+        <div class="stat">
+            <strong>24/7</strong>
+            <span>Infrastructure Monitoring</span>
+        </div>
+
+        <div class="stat">
+            <strong>Azure</strong>
+            <span>Cloud Infrastructure</span>
+        </div>
+
+        <div class="stat">
+            <strong>CI/CD</strong>
+            <span>Automated Deployment</span>
+        </div>
+
+    </div>
+</div>
+
+<!-- PLATFORM -->
+<section class="content-section" id="platform">
+
+    <div class="section-heading">
+        <span class="label">Our Platform</span>
+
+        <h2>
+            Technology designed to move banking forward.
+        </h2>
+
+        <p>
+            Our corporate technology environment brings together
+            cloud infrastructure, automated deployments, application
+            monitoring and secure development workflows.
+        </p>
+    </div>
+
+    <div class="service-grid">
+
+        <div class="card">
+            <div class="icon">◈</div>
+
+            <h3>Cloud Applications</h3>
+
+            <p>
+                Deploy scalable web applications through managed
+                cloud infrastructure built for reliability and
+                high availability.
+            </p>
+
+            <a href="#" class="card-link">
+                Explore services →
+            </a>
+        </div>
+
+        <div class="card">
+            <div class="icon">▣</div>
+
+            <h3>Container Platform</h3>
+
+            <p>
+                Package, deploy and manage applications using
+                modern containerized development and deployment
+                workflows.
+            </p>
+
+            <a href="#" class="card-link">
+                View environment →
+            </a>
+        </div>
+
+        <div class="card">
+            <div class="icon">⌁</div>
+
+            <h3>Continuous Delivery</h3>
+
+            <p>
+                Connect source control with automated build,
+                testing and deployment pipelines for faster
+                application delivery.
+            </p>
+
+            <a href="#" class="card-link">
+                View pipelines →
+            </a>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- FEATURE -->
+<section class="content-section" id="monitoring">
+
+    <div class="feature">
+
+        <div class="feature-visual">
+
+            <div style="position:relative; z-index:2;">
+                <span style="font-size:13px; opacity:.75;">
+                    LIVE ENVIRONMENT
+                </span>
+
+                <h2 style="font-size:36px; margin:8px 0;">
+                    Infrastructure
+                    <br>
+                    at a glance.
+                </h2>
+            </div>
+
+            <div class="terminal">
+                <div>
+                    <span class="green">●</span>
+                    Production environment
+                </div>
+
+                <br>
+
+                <div>
+                    CPU ............... <span class="green">18%</span>
+                </div>
+
+                <div>
+                    Memory ............ <span class="green">42%</span>
+                </div>
+
+                <div>
+                    Application ....... <span class="green">Healthy</span>
+                </div>
+
+                <div>
+                    Deployment ........ <span class="green">Ready</span>
+                </div>
+
+                <div>
+                    Monitoring ........ <span class="green">Active</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="feature-copy">
+
+            <span class="section-heading label">
+                Infrastructure Monitoring
+            </span>
+
+            <h2>
+                Know what is happening across your environment.
+            </h2>
+
+            <p>
+                Keep applications and infrastructure visible with
+                centralized telemetry, resource monitoring and
+                automated notifications.
+            </p>
+
+            <ul class="check-list">
+                <li>Application performance monitoring</li>
+                <li>Resource utilization tracking</li>
+                <li>Deployment health checks</li>
+                <li>Automated incident notifications</li>
+                <li>Centralized operational visibility</li>
+            </ul>
+
+            <a href="#" class="btn"
+               style="background:var(--purple); color:#fff;">
+                Open Monitoring
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- SERVICES -->
+<section class="content-section services" id="services">
+
+    <div class="section-heading">
+        <span class="label">Enterprise Services</span>
+
+        <h2>
+            Everything your development team needs.
+        </h2>
+
+        <p>
+            A simplified technology environment for building,
+            deploying and operating secure digital applications.
+        </p>
+    </div>
+
+    <div class="service-grid">
+
+        <div class="card">
+            <div class="icon">⚙</div>
+            <h3>Application Services</h3>
+            <p>
+                Managed environments for hosting modern business
+                applications and internal platforms.
+            </p>
+            <a href="#" class="card-link">Learn more →</a>
+        </div>
+
+        <div class="card">
+            <div class="icon">⌘</div>
+            <h3>Developer Tools</h3>
+            <p>
+                Streamline development through source control,
+                automation and repeatable deployment workflows.
+            </p>
+            <a href="#" class="card-link">Explore tools →</a>
+        </div>
+
+        <div class="card">
+            <div class="icon">✓</div>
+            <h3>Security & Compliance</h3>
+            <p>
+                Support secure application delivery with controlled
+                environments, monitoring and operational policies.
+            </p>
+            <a href="#" class="card-link">View controls →</a>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CTA -->
+<div class="cta" id="documentation">
+
+    <div>
+        <h2>Ready to deploy?</h2>
+
+        <p>
+            Access deployment resources, technical documentation
+            and infrastructure tools from one environment.
+        </p>
+    </div>
+
+    <a href="#" class="btn btn-primary">
+        Open Deployment Console
+    </a>
+
+</div>
+
+<!-- FOOTER -->
+<footer id="contact">
+
+    <div class="footer-grid">
+
+        <div class="footer-brand">
+
+            <h3>Wema Bank</h3>
+
+            <p>
+                Corporate technology environment for modern,
+                secure and scalable digital banking applications.
+            </p>
+
+            <p>
+                <strong>Corporate IT Environment</strong>
+            </p>
+
+        </div>
+
+        <div>
+            <h4>Platform</h4>
+            <a href="#">Cloud Applications</a>
+            <a href="#">Containers</a>
+            <a href="#">CI/CD</a>
+            <a href="#">Monitoring</a>
+        </div>
+
+        <div>
+            <h4>Resources</h4>
+            <a href="#">Documentation</a>
+            <a href="#">Developer Tools</a>
+            <a href="#">System Status</a>
+            <a href="#">Support</a>
+        </div>
+
+        <div>
+            <h4>Environment</h4>
+            <a href="#">Azure App Service</a>
+            <a href="#">GitHub</a>
+            <a href="#">Azure Monitor</a>
+            <a href="#">Security</a>
+        </div>
+
+    </div>
+
+    <div class="copyright">
+
+        <span>
+            © 2026 Wema Bank. Enterprise Cloud Environment.
+        </span>
+
+        <span>
+            Licensed by the Central Bank of Nigeria
+        </span>
+
+    </div>
+
+</footer>
+</body>
+</html>
